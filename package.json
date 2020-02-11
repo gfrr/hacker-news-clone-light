@@ -1,0 +1,54 @@
+{
+  "name": "hacker-news-clone-light",
+  "version": "1.0.0",
+  "description": "a light clone of hacker news",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "NODE_ENV='production' webpack",
+    "build-for-windows": "set NODE_ENV=production&&webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfrr/hacker-news-clone-light.git"
+  },
+  "keywords": [
+    "react",
+    "hooks"
+  ],
+  "author": "Giuseppe Fierro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfrr/hacker-news-clone-light/issues"
+  },
+  "homepage": "https://github.com/gfrr/hacker-news-clone-light#readme",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "syntax-dynamic-import"
+    ]
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-icons": "^3.9.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "css-loader": "^3.4.2",
+    "html-webpack-plugin": "^3.2.0",
+    "prop-types": "^15.7.2",
+    "style-loader": "^1.1.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
