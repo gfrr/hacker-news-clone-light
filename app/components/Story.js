@@ -7,6 +7,7 @@ import ThemeContext from '../contexts/theme'
 export default function Story({ title, url, user, time, comments, id, isHeader }) {
   const theme = React.useContext(ThemeContext)
   const link = <a className="link" href={url}>{title}</a>
+  const date = React.useMemo(() => new Date(time * 1000).toLocaleString(), [time])
 
   return (
     <React.Fragment>
@@ -15,7 +16,7 @@ export default function Story({ title, url, user, time, comments, id, isHeader }
         : link}
       <div className={`meta-info ${theme}`}>
         <span>by <Link to={`/user?id=${user}`}>{user}</Link></span>
-        <span>on {time.toLocaleString()}</span>
+        <span>on {date}</span>
         <span>with <Link to={`/post?id=${id}`}>{comments}</Link> comments</span>
       </div>
     </React.Fragment>
