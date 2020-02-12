@@ -7,6 +7,8 @@ import Nav from './components/Nav'
 import { ThemeProvider } from './contexts/theme'
 import './index.css'
 
+const Stories = React.lazy(() => import('./components/Stories'))
+
 function App() {
   const [theme, setTheme] = React.useState('light')
   const toggleTheme = () => setTheme(theme => theme === 'light' ? 'dark' : 'light')
@@ -19,7 +21,7 @@ function App() {
             <Nav toggleTheme={toggleTheme}/>
             <React.Suspense fallback={<Loading />}>
               <Switch>
-                <Route exact path="/" render={() => <h1>top</h1>}/>
+                <Route exact path="/" component={Stories} />
                 <Route exact path="/new" render={() => <h1>new</h1>}/>
                 <Route render={() => <h1>404</h1>}/>
               </Switch>
