@@ -21,8 +21,7 @@ function App() {
             <Nav toggleTheme={toggleTheme}/>
             <React.Suspense fallback={<Loading />}>
               <Switch>
-                <Route exact path="/" component={Stories} />
-                <Route exact path="/new" render={() => <h1>new</h1>}/>
+                <Route exact path="/(|new)" component={Stories} />
                 <Route render={() => <h1>404</h1>}/>
               </Switch>
             </React.Suspense>

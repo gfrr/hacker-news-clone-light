@@ -12,5 +12,5 @@ function getItem(id) {
 export function getStories(type = 'top') {
   return getStoriesIds(type)
     .then(ids => ids.map(id => getItem(id)))
-    .then(items => Promise.all(items).then(results => results))
+    .then(items => Promise.all(items).then(results => results.filter(result => Boolean(result))))
 }

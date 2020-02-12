@@ -27,7 +27,8 @@ const storiesReducer = (state, { type, message, stories }) => {
   }
 }
 
-export default function Stories() {
+export default function Stories({ location }) {
+  const storyType = location.pathname === '/new' ? 'new' : 'top'
   const [{ stories, loading, error}, dispatch] = React.useReducer(storiesReducer, {
     stories: [],
     loading: true,
@@ -36,10 +37,10 @@ export default function Stories() {
 
   React.useEffect(() => {
     dispatch({type:'loading'})
-    getStories('top')
+    getStories(storyType)
       .then(stories => dispatch({type: 'success', stories}))
       .catch(({ message }) => dispatch({type: 'error', message }))
-  }, [])
+  }, [storyType])
 
   if (loading) {
     return <Loading />
