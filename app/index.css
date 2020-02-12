@@ -28,6 +28,10 @@ li {
   min-height: 100%;
 }
 
+.dark a {
+  color: rgb(203, 203, 203);
+}
+
 .nav-link {
   font-size: 18px;
   font-weight: bold;
@@ -74,4 +78,28 @@ li {
 
 .post {
   margin: 20px 0;
+}
+
+.link {
+  color: rgb(187, 46, 31);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.meta-info {
+  margin-top: 5px;
+  color: gray;
+}
+
+.meta-info span {
+  margin: 10px 0;
+  margin-right: 6px;
+}
+
+.meta-info.light a {
+  color: black;
+}
+
+.meta-info.dark a {
+  color: #bebebe;
 }

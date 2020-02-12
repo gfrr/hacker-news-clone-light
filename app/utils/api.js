@@ -1,3 +1,5 @@
+import Story from "../components/Story"
+
 function getStoriesIds(type = 'top') {
   return fetch(`https://hacker-news.firebaseio.com/v0/${type}stories.json`)
     .then(res => res.json())
@@ -12,5 +14,5 @@ function getItem(id) {
 export function getStories(type = 'top') {
   return getStoriesIds(type)
     .then(ids => ids.map(id => getItem(id)))
-    .then(items => Promise.all(items).then(results => results.filter(result => Boolean(result))))
+    .then(items => Promise.all(items).then(results => results.filter(result => result && result.url && result.type === 'story')))
 }
