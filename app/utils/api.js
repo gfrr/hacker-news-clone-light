@@ -1,18 +1,21 @@
-import Story from "../components/Story"
-
-function getStoriesIds(type = 'top') {
+function fetchAllStoriesIds(type = 'top') {
   return fetch(`https://hacker-news.firebaseio.com/v0/${type}stories.json`)
     .then(res => res.json())
     .then(stories => stories.slice(0,50))
 }
 
-function getItem(id) {
+function fetchItem(id) {
   return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
     .then(res => res.json())
 }
 
-export function getStories(type = 'top') {
-  return getStoriesIds(type)
-    .then(ids => ids.map(id => getItem(id)))
+export function fetchAllStories(type = 'top') {
+  return fetchAllStoriesIds(type)
+    .then(ids => ids.map(id => fetchItem(id)))
     .then(items => Promise.all(items).then(results => results.filter(result => result && result.url && result.type === 'story')))
+}
+
+export function fetchUser(id) {
+  return fetch(`https://hacker-news.firebaseio.com/v0/user/${id}.json`)
+    .then(res => res.json())
 }

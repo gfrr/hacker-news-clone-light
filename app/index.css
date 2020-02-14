@@ -103,3 +103,7 @@ li {
 .meta-info.dark a {
   color: #bebebe;
 }
+
+.header {
+  margin-bottom: 5px;
+}

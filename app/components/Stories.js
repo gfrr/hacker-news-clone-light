@@ -1,47 +1,25 @@
 import React from 'react'
 
-import { getStories } from '../utils/api'
+import { fetchAllStories } from '../utils/api'
+import { useFetch } from '../hooks/useFetch'
 import Loading from './Loading'
 import Story from './Story'
 
-const storiesReducer = (state, { type, message, stories }) => {
-  switch (type) {
-    case 'loading':
-      return {
-        ...state,
-        loading: true
-      }
-    case 'success':
-      return {
-        stories,
-        loading: false,
-        error: null
-      }
-    case 'error':
-      return {
-        ...state,
-        loading: false,
-        error: message
-      }
-    default:
-      throw new Error('Unknown action dispatched')
-  }
-}
-
 export default function Stories({ location }) {
   const storyType = location.pathname === '/new' ? 'new' : 'top'
-  const [{ stories, loading, error }, dispatch] = React.useReducer(storiesReducer, {
-    stories: [],
-    loading: true,
-    error: null
-  })
+  const { stories, loading, error } = useFetch(fetchAllStories, [storyType], [storyType], 'stories')
+  // const [{ stories, loading, error }, dispatch] = React.useReducer(storiesReducer, {
+  //   stories: [],
+  //   loading: true,
+  //   error: null
+  // })
 
-  React.useEffect(() => {
-    dispatch({ type: 'loading' })
-    getStories(storyType)
-      .then(stories => dispatch({ type: 'success', stories }))
-      .catch(({ message }) => dispatch({ type: 'error', message }))
-  }, [storyType])
+  // React.useEffect(() => {
+  //   dispatch({ type: 'loading' })
+  //   fetchAllStories(storyType)
+  //     .then(stories => dispatch({ type: 'success', stories }))
+  //     .catch(({ message }) => dispatch({ type: 'error', message }))
+  // }, [storyType])
 
   if (loading) {
     return <Loading />

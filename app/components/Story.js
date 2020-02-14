@@ -12,7 +12,7 @@ export default function Story({ title, url, user, time, comments, id, isHeader }
   return (
     <React.Fragment>
       {isHeader
-        ? <h1>{link}</h1>
+        ? <h1 className='header'>{link}</h1>
         : link}
       <div className={`meta-info ${theme}`}>
         <span>by <Link to={`/user?id=${user}`}>{user}</Link></span>
