@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { fetchStories } from '../utils/api'
+import { fetchPopularStories } from '../utils/api'
 import { useFetch } from '../hooks/useFetch'
 import Loading from './Loading'
 import Story from './Story'
 
 export default function Stories({ location }) {
   const storyType = location.pathname === '/new' ? 'new' : 'top'
-  const { stories, loading, error } = useFetch(fetchStories, [storyType], [storyType], 'stories')
+  const { stories, loading, error } = useFetch(fetchPopularStories, [storyType], [storyType], 'stories')
 
   if (loading) {
     return <Loading />

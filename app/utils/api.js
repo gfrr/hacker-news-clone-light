@@ -9,13 +9,18 @@ function fetchItem(id) {
     .then(res => res.json())
 }
 
-export function fetchStories(type = 'top') {
+export function fetchPopularStories(type = 'top') {
   return fetchStoriesIds(type)
-    .then(ids => ids.map(id => fetchItem(id)))
-    .then(items => Promise.all(items).then(results => results.filter(result => Boolean(result))))
+    .then(ids => fetchItems(ids))
+    .then(items => items)
 }
 
 export function fetchUser(id) {
   return fetch(`https://hacker-news.firebaseio.com/v0/user/${id}.json`)
     .then(res => res.json())
+}
+
+export function fetchItems(ids, filterFn) {
+  const items = ids.map(id => fetchItem(id))
+  return Promise.all(items).then(results => results.filter(filterFn ? filterFn : Boolean))
 }

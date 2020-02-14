@@ -7,14 +7,14 @@ import ThemeContext from '../contexts/theme'
 export default function Story({ story, isHeader }) {
   const { title, by, url, descendants, id, time } = story
   const theme = React.useContext(ThemeContext)
-  const mainText = url ? <a className="link" href={url}>{title}</a> : <p><b>{title}</b></p>
+  const text = url ? <a className="link">{title}</a> : <Link className="link" to={`/post?id=${id}`}>{title}</Link>
   const date = React.useMemo(() => new Date(time * 1000).toLocaleString(), [time])
 
   return (
     <React.Fragment>
       {isHeader
-        ? <h1 className='header'>{mainText}</h1>
-        : mainText}
+        ? <h1 className='header'>{text}</h1>
+        : text}
       <div className={`meta-info ${theme}`}>
         <span>by <Link to={`/user?id=${by}`}>{by}</Link></span>
         <span>on {date}</span>
@@ -29,8 +29,8 @@ Story.propTypes = {
     title: PropTypes.string.isRequired,
     by: PropTypes.string.isRequired,
     time: PropTypes.number.isRequired,
-    descendants: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
+    descendants: PropTypes.number,
     url: PropTypes.string
   }).isRequired,
   isHeader: PropTypes.bool
