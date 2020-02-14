@@ -1,4 +1,4 @@
-function fetchAllStoriesIds(type = 'top') {
+function fetchStoriesIds(type = 'top') {
   return fetch(`https://hacker-news.firebaseio.com/v0/${type}stories.json`)
     .then(res => res.json())
     .then(stories => stories.slice(0,50))
@@ -9,10 +9,10 @@ function fetchItem(id) {
     .then(res => res.json())
 }
 
-export function fetchAllStories(type = 'top') {
-  return fetchAllStoriesIds(type)
+export function fetchStories(type = 'top') {
+  return fetchStoriesIds(type)
     .then(ids => ids.map(id => fetchItem(id)))
-    .then(items => Promise.all(items).then(results => results.filter(result => result && result.url && result.type === 'story')))
+    .then(items => Promise.all(items).then(results => results.filter(result => Boolean(result))))
 }
 
 export function fetchUser(id) {
