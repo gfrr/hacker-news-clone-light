@@ -9,6 +9,7 @@ import './index.css'
 
 const Stories = React.lazy(() => import('./components/Stories'))
 const User = React.lazy(() => import('./components/User'))
+const Post = React.lazy(() => import('./components/Post'))
 
 function App() {
   const [theme, setTheme] = React.useState('light')
@@ -23,7 +24,8 @@ function App() {
             <React.Suspense fallback={<Loading />}>
               <Switch>
                 <Route exact path="/(|new)" component={Stories} />
-                <Route path='/user' component={User} />
+                <Route path="/user" component={User} />
+                <Route path="/post" component={Post} />
                 <Route render={() => <h1>404</h1>}/>
               </Switch>
             </React.Suspense>

@@ -34,7 +34,7 @@ UserProfile.propTypes = {
   }).isRequired
 }
 
-const filter = (result) => result.type === 'story'
+const filter = (result) => result && result.type === 'story'
 
 function UserStories({ storiesIds }) {
   const { stories, loading, error } = useFetch(fetchItems, [storiesIds, filter], [storiesIds], 'stories')
@@ -46,20 +46,22 @@ function UserStories({ storiesIds }) {
     return <p className="center-text error">error</p>
   }
 
-  return stories && (
-    <React.Fragment>
-      <h2>Posts</h2>
-      <ul>
-        {stories.map(story => (
-          <li
-            key={story.id}
-            className="post">
-            <Story story={story} />
-          </li>
-        ))}
-      </ul>
-    </React.Fragment>
-  )
+  return stories.length 
+    ? (
+      <React.Fragment>
+        <h2>Posts</h2>
+        <ul>
+          {stories.map(story => (
+            <li
+              key={story.id}
+              className="post">
+              <Story story={story} />
+            </li>
+          ))}
+        </ul>
+      </React.Fragment>
+    ) 
+    : <p className="center-text">This user hasn't posted yet</p>
 }
 
 UserStories.propTypes = {

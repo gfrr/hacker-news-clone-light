@@ -1,10 +1,9 @@
 function fetchStoriesIds(type = 'top') {
   return fetch(`https://hacker-news.firebaseio.com/v0/${type}stories.json`)
     .then(res => res.json())
-    .then(stories => stories.slice(0,50))
 }
 
-function fetchItem(id) {
+export function fetchItem(id) {
   return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
     .then(res => res.json())
 }
@@ -20,7 +19,8 @@ export function fetchUser(id) {
     .then(res => res.json())
 }
 
-export function fetchItems(ids, filterFn) {
-  const items = ids.map(id => fetchItem(id))
+export function fetchItems(ids, filterFn, limit = 50) {
+  const requestIds = ids.slice(0, limit)
+  const items = requestIds.map(id => fetchItem(id))
   return Promise.all(items).then(results => results.filter(filterFn ? filterFn : Boolean))
 }
